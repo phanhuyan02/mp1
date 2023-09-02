@@ -2,13 +2,13 @@ import socket
 import subprocess
 
 # Define the host and port for the server
-host = '127.0.0.1'
+host = '172.19.62.216'
 port = 12345
 
 # Create a socket for the server
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((host, port))
-server_socket.listen(1)
+server_socket.listen(4)
 print(f"Server listening on {host}:{port}")
 
 while True:
