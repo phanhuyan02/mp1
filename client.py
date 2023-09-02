@@ -4,11 +4,11 @@ import threading
 # Define a list of server addresses
 server_addresses = [
     ('172.22.159.9', 12345),  # Server 1
-    ('172.22.95.9', 12345),  # Server 2
+    ('172.22.95.9', 12345),   # Server 2
     # Add more servers as needed
 ]
 
-def handle_server(server_address):
+def handle_server(server_address, query):
     # Create a socket for the client
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -16,9 +16,6 @@ def handle_server(server_address):
         # Connect to the server
         client_socket.connect(server_address)
         print(f"Connected to the server at {server_address}")
-
-        # Input a search query from the user
-        query = input("Enter a search query: ")
 
         # Send the query to the server
         client_socket.send(query.encode('utf-8'))
@@ -45,10 +42,13 @@ def handle_server(server_address):
         # Close the client socket
         client_socket.close()
 
+# Input a search query from the user
+query = input("Enter a search query: ")
+
 # Create threads for each server connection
 threads = []
 for server_address in server_addresses:
-    thread = threading.Thread(target=handle_server, args=(server_address,))
+    thread = threading.Thread(target=handle_server, args=(server_address, query))
     threads.append(thread)
 
 # Start all threads
